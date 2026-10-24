@@ -1,4 +1,10 @@
 
+require('packer').init({
+  git = {
+    clone_timeout = 300,
+  },
+})
+
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
@@ -16,7 +22,7 @@ require('packer').startup(function()
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim' 
-  use 'phaazon/hop.nvim'
+  use 'smoka7/hop.nvim'
   use 'akinsho/nvim-toggleterm.lua'
   use 'windwp/nvim-autopairs'
   use 'nvim-neotest/nvim-nio'
@@ -41,19 +47,21 @@ require('packer').startup(function()
   use 'mfussenegger/nvim-dap-python'
   use 'theHamsta/nvim-dap-virtual-text'
   use 'nvim-telescope/telescope-dap.nvim'
-  use 'simrat39/rust-tools.nvim'
+  use { 'mrcjkb/rustaceanvim', tag = 'v8.0.5' }
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
   use 'preservim/tagbar'
   use {
-      'stevearc/aerial.nvim',
+      "stevearc/aerial.nvim",
+      tag = "v3.1.0",
   }
   use 'lewis6991/gitsigns.nvim'
   use 'tpope/vim-fugitive'
   -- do a :TSInstall all 
   use({'nvim-treesitter/nvim-treesitter',
+       branch = 'master',
        run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()

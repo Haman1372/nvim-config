@@ -14,7 +14,7 @@ set smartcase
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-luafile ~/.config/nvim/lua/init.lua
+lua dofile(vim.fn.stdpath('config') .. '/lua/init.lua')
 
 
 set rtp+=/bin/

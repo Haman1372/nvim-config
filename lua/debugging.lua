@@ -1,7 +1,6 @@
 dap = require("dap")
 dapui = require("dapui")
 dappyton = require('dap-python')
-daprusttools = require('rust-tools')
 
 dapui_configs = {
   icons = { expanded = "▾", collapsed = "▸" },
@@ -67,11 +66,9 @@ dapui_configs = {
 
 dapui.setup(dapui_config)
 dappyton.setup('~/.virtualenvs/debugpy/bin/python')
-daprusttools.setup({})
 
 require('telescope').load_extension('dap')
 require("telescope").load_extension("i23")
-require('dap.ext.vscode').load_launchjs()
 require("nvim-dap-virtual-text").setup()
 
 dappyton.test_runner = 'pytest'
@@ -79,7 +76,7 @@ dappyton.test_runner = 'pytest'
 
 dap.adapters.lldb = {
   type = 'executable',
-  command = '/usr/lib/llvm-14/bin/lldb-vscode', 
+  command = '/usr/bin/lldb-dap',
   name = "lldb"
 }
 dap.configurations.cpp = {
