@@ -64,7 +64,7 @@ dapui_configs = {
   windows = { indent = 1 },
 }
 
-dapui.setup(dapui_config)
+dapui.setup(dapui_configs)
 dappyton.setup('~/.virtualenvs/debugpy/bin/python')
 
 require('telescope').load_extension('dap')
@@ -103,7 +103,8 @@ dap.configurations.cpp = {
     -- But you should be aware of the implications:
     -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
 
-    runInTerminal = true,
+    runInTerminal = false,
+    console = "internalConsole",
 
     -- 💀
     -- If you use `runInTerminal = true` and resize the terminal window,
@@ -151,6 +152,24 @@ dap.configurations.cpp = {
       pid = require('dap.utils').pick_process,
       args = {},
     },
+}
+dap.configurations.c = {
+  {
+    name = "Launch C executable",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input(
+        "Path to C executable: ",
+        vim.fn.getcwd() .. "/",
+        "file"
+      )
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+    args = {},
+    console = "internalConsole",
+  },
 }
 
 
